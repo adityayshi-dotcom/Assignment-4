@@ -1,0 +1,48 @@
+class Question {
+  String questionText;
+  List<String> options;
+  int correctAnswerIndex;
+
+  Question(this.questionText, this.options, this.correctAnswerIndex);
+}
+
+class Quiz {
+  List<Question> questions;
+  int score = 0;
+
+  Quiz(this.questions);
+
+  void start() {
+    for (var i = 0; i < questions.length; i++) {
+      var q = questions[i];
+      print("\nQ${i + 1}: ${q.questionText}");
+      for (var j = 0; j < q.options.length; j++) {
+        print("${j + 1}. ${q.options[j]}");
+      }
+
+      
+      int userAnswer = 1; // Always selects first option for demo
+      print("Your answer: ${userAnswer}");
+
+      if (userAnswer - 1 == q.correctAnswerIndex) {
+        print(" Correct!");
+        score++;
+      } else {
+        print(" Wrong! Correct answer: ${q.options[q.correctAnswerIndex]}");
+      }
+    }
+
+    print("\nYour total score: $score/${questions.length}");
+  }
+}
+
+void main() {
+  List<Question> questionList = [
+    Question("What is the capital of France?", ["Paris", "London", "Rome"], 0),
+    Question("5 + 3 = ?", ["5", "8", "10"], 1),
+    Question("Dart is developed by?", ["Google", "Microsoft", "Apple"], 0),
+  ];
+
+  Quiz quiz = Quiz(questionList);
+  quiz.start();
+}
